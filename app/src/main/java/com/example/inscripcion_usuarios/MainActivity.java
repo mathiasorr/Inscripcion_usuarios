@@ -1,29 +1,23 @@
 package com.example.inscripcion_usuarios;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
-import android.view.View;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-
-import android.content.Intent;
-
-import android.widget.Toast;
-
 public class MainActivity extends AppCompatActivity {
 
     private EditText etCedula, etNombres, etFechaNacimiento, etCiudad, etCorreo, etTelefono;
-    private RadioGroup rgGenero;
+    private AutoCompleteTextView rgGenero;
     private Button btnLimpiar, btnEnviar;
 
     @Override
@@ -79,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         etNombres.setText("");
         etFechaNacimiento.setText("");
         etCiudad.setText("");
-        rgGenero.clearCheck();
+        rgGenero.setText("");
         etCorreo.setText("");
         etTelefono.setText("");
     }
@@ -88,13 +82,11 @@ public class MainActivity extends AppCompatActivity {
         String cedula = etCedula.getText().toString();
         String nombres = etNombres.getText().toString();
         String fechaNacimiento = etFechaNacimiento.getText().toString();
+        String genero = rgGenero.getText().toString();
         String ciudad = etCiudad.getText().toString();
         String correo = etCorreo.getText().toString();
         String telefono = etTelefono.getText().toString();
 
-        int selectedGeneroId = rgGenero.getCheckedRadioButtonId();
-        RadioButton selectedGeneroButton = findViewById(selectedGeneroId);
-        String genero = selectedGeneroButton == null ? "" : selectedGeneroButton.getText().toString();
 
         Intent intent = new Intent(MainActivity.this, Datos.class);
         intent.putExtra("CEDULA", cedula);
